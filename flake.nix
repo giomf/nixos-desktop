@@ -37,9 +37,9 @@
           nixos-hardware.nixosModules.lenovo-thinkpad-l13
           {
             nix.settings = {
-                substituters = [ "https://cosmic.cachix.org/" ];
-                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-              };
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+            };
           }
           nixos-cosmic.nixosModules.default
           home-manager.nixosModules.home-manager
@@ -47,9 +47,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.guif = ./hosts/l380/home.nix;
-            nixpkgs.overlays = [
-              nur.overlay
-            ];
+            nixpkgs.overlays = [ nur.overlay ];
           }
         ];
       };
