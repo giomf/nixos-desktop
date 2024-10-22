@@ -1,85 +1,76 @@
 {
   description = "System flake";
   inputs = {
-    # Official NixOS package source, using nixos-unstable branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # home-manager, used for managing user configuration
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+    ### Stable
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-
     # Nix user repositories
     nur.url = "github:nix-community/NUR";
+
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    ### Unstable
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # WSL
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    # NixOs hardware quirks
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nur, nixos-wsl, nixos-hardware, nixos-cosmic, ... }: {
-    nixosConfigurations = {
-      "glap" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/l380
-          nixos-hardware.nixosModules.lenovo-thinkpad-l13
-          {
-            nix.settings = {
-              substituters = [ "https://cosmic.cachix.org/" ];
-              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-            };
-          }
-          nixos-cosmic.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.guif = ./hosts/l380/home.nix;
-            nixpkgs.overlays = [ nur.overlay ];
-          }
-        ];
-      };
+  outputs = { nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, nur, nixos-wsl
+    , nixos-hardware, nixos-cosmic, ... }: {
+      nixosConfigurations = {
+        "glap" = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/l380
+            nixos-hardware.nixosModules.lenovo-thinkpad-l13
+            {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
+            }
+            nixos-cosmic.nixosModules.default
+            home-manager-unstable.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.guif = ./hosts/l380/home.nix;
+              nixpkgs.overlays = [ nur.overlay ];
+            }
+          ];
+        };
 
-      "wsl" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/wsl
-          nixos-wsl.nixosModules.wsl
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.guif = ./hosts/wsl/home.nix;
-          }
-        ];
-      };
-
-      "pi" = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          ./hosts/pi
-          nixos-hardware.nixosModules.raspberry-pi-4
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.guif = ./hosts/pi/home.nix;
-          }
-        ];
+        "wsl" = nixpkgs-stable.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/wsl
+            nixos-wsl.nixosModules.wsl
+            home-manager-stable.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.guif = ./hosts/wsl/home.nix;
+            }
+          ];
+        };
       };
     };
-  };
 }
