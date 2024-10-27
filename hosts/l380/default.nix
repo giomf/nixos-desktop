@@ -1,7 +1,12 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../common.nix ./cosmic.nix ./greetd.nix ./hardware-configuration.nix ];
+  imports = [
+    ../common.nix
+    ./cosmic.nix
+    ./greetd.nix
+    ./hardware-configuration.nix
+  ];
 
   system.stateVersion = "23.05";
 
@@ -76,7 +81,14 @@
   };
 
   # User
-  users.users.guif = { extraGroups = [ "video" "audio" "networkmanager" "libvirtd" ]; };
+  users.users.guif = {
+    extraGroups = [
+      "video"
+      "audio"
+      "networkmanager"
+      "libvirtd"
+    ];
+  };
 
   # Networking
   networking = {
@@ -95,8 +107,10 @@
     };
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [ intel-compute-runtime intel-media-driver ];
+      extraPackages = with pkgs; [
+        intel-compute-runtime
+        intel-media-driver
+      ];
     };
   };
 }
-

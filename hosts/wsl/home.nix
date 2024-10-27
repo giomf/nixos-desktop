@@ -6,9 +6,9 @@
     # ../../home/keyring.nix
   ];
 
-   home.packages = with pkgs; [
-     # for nix IDE
-     nixpkgs-fmt
-   ];
+  home.packages = with pkgs; [
+    # for nix IDE
+    nixpkgs-fmt
+  ];
 
 }

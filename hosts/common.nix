@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   time.timeZone = "Europe/Berlin";
   console = {
     keyMap = "de";
@@ -13,7 +16,12 @@
     fontDir.enable = true;
     packages = with pkgs; [
       font-awesome
-      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "FiraCode" ]; })
+      (nerdfonts.override {
+        fonts = [
+          "NerdFontsSymbolsOnly"
+          "FiraCode"
+        ];
+      })
       noto-fonts
       noto-fonts-emoji
 
@@ -59,4 +67,3 @@
     };
   };
 }
-

@@ -33,8 +33,19 @@
 
   };
 
-  outputs = { nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, nur, nixos-wsl
-    , nixos-hardware, nixos-cosmic, ... }: {
+  outputs =
+    {
+      nixpkgs-stable,
+      nixpkgs-unstable,
+      home-manager-stable,
+      home-manager-unstable,
+      nur,
+      nixos-wsl,
+      nixos-hardware,
+      nixos-cosmic,
+      ...
+    }:
+    {
       nixosConfigurations = {
         "glap" = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
