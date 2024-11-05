@@ -32,9 +32,9 @@ case "$1" in
         case "$2" in
             stable)
                 echo "Updating stable inputs..."
-                nix flake update nixpkgs-stable \
-                                 home-manager-stable \
-                                 nixos-wsl
+                nix flake lock --update-input nixpkgs-stable \
+                                --update-input home-manager-stable \
+                                --update-input nixos-wsl
                 echo "Stable inputs updated."
                 ;;
             unstable)
