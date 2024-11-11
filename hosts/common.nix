@@ -1,10 +1,19 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
+
   time.timeZone = "Europe/Berlin";
   console = {
     keyMap = "de";
