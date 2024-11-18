@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -36,8 +39,8 @@
   # Allow wayland support in all chrome and most electron apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  environment.systemPackages = with pkgs; [ ];
-  environment.defaultPackages = with pkgs; [ ];
+  # environment.systemPackages = with pkgs; [ ];
+  # environment.defaultPackages = with pkgs; [ ];
 
   xdg.portal = {
     config.common.default = "*";
@@ -53,6 +56,10 @@
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
     };
   };
 
@@ -87,6 +94,8 @@
       "audio"
       "networkmanager"
       "libvirtd"
+      "dialout"
+      "wireshark"
     ];
   };
 
