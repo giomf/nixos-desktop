@@ -85,6 +85,12 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
   };
 
   # User
