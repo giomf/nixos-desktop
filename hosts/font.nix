@@ -7,12 +7,8 @@
     fontDir.enable = true;
     packages = with pkgs; [
       font-awesome
-      (nerdfonts.override {
-        fonts = [
-          "NerdFontsSymbolsOnly"
-          "FiraCode"
-        ];
-      })
+      nerd-fonts.fira-code
+      nerd-fonts.symbols-only
       noto-fonts
       noto-fonts-emoji
 

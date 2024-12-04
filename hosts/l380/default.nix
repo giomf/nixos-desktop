@@ -6,7 +6,6 @@
 {
   imports = [
     ../common.nix
-    ./cosmic.nix
     ./greetd.nix
     ./hardware-configuration.nix
   ];
