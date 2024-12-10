@@ -29,4 +29,11 @@
   };
 
   networking.hostName = "wsl";
+
+  boot = {
+    # Allow building img for pi
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+  };
+
+  wsl.interop.register = true;
 }
