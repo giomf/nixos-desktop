@@ -89,7 +89,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.guif = ./hosts/framework13/home.nix;
-              nixpkgs.overlays = [ nur.overlay ];
+              nixpkgs.overlays = [ nur.overlays.default ];
             }
           ];
         };
