@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -7,7 +7,10 @@
   ];
 
   # Packages
-  home.packages = with pkgs; [ usbutils ];
+  home.packages = with pkgs; [
+    usbutils
+    amdgpu_top
+  ];
 
   # workaround for virt-manager
   # https://discourse.nixos.org/t/virt-manager-cannot-create-vm/38894/4
