@@ -56,7 +56,7 @@
     }:
     {
       nixosConfigurations = {
-        "glap" = nixpkgs-unstable.lib.nixosSystem {
+        "glap-old" = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/l380
@@ -78,7 +78,7 @@
           ];
         };
 
-        "glap-fw" = nixpkgs-unstable.lib.nixosSystem {
+        "glap" = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/framework13
