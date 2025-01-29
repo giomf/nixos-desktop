@@ -26,6 +26,12 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # Disk partitioning
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # nixos-cosmic = {
     #   url = "github:lilyinstarlight/nixos-cosmic";
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -37,13 +43,14 @@
 
   outputs =
     {
-      nixpkgs-stable,
-      nixpkgs-unstable,
+      disko,
       home-manager-stable,
       home-manager-unstable,
-      nur,
-      nixos-wsl,
       nixos-hardware,
+      nixos-wsl,
+      nixpkgs-stable,
+      nixpkgs-unstable,
+      nur,
       # nixos-cosmic,
       ...
     }:
@@ -61,6 +68,22 @@
             #   };
             # }
             # nixos-cosmic.nixosModules.default
+            home-manager-unstable.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.guif = ./hosts/l380/home.nix;
+              nixpkgs.overlays = [ nur.overlay ];
+            }
+          ];
+        };
+
+        "glap-fw" = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/framework13
+            disko.nixosModules.disko
+            nixos-hardware.nixosModules.framework-13-7040-amd
             home-manager-unstable.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
