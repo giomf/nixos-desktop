@@ -7,6 +7,7 @@
   imports = [
     ../common.nix
     ./greetd.nix
+    ./steam.nix
     ./disko-config.nix
     ./hardware-configuration.nix
   ];
@@ -44,11 +45,6 @@
     # Needed for backlight controll as non root
     light.enable = true;
     virt-manager.enable = true;
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    };
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
