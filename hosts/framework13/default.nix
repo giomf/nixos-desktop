@@ -74,6 +74,9 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    # Not needed for fw13: https://community.frame.work/t/guide-fw13-ryzen-power-management/42988
+    # auto-cpufreq.enale = true:
+    upower.enable = true;
 
     avahi = {
       enable = true;
