@@ -56,21 +56,6 @@
     }:
     {
       nixosConfigurations = {
-        "glap-old" = nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/l380
-            nixos-hardware.nixosModules.lenovo-thinkpad-l13
-            home-manager-unstable.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.guif = ./hosts/l380/home.nix;
-              nixpkgs.overlays = [ nur.overlay ];
-            }
-          ];
-        };
-
         "glap" = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -82,12 +67,10 @@
                 substituters = [ "https://cosmic.cachix.org/" ];
                 trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
               };
+              nixpkgs.overlays = [ nur.overlays.default ];
             }
             nixos-cosmic.nixosModules.default
             home-manager-unstable.nixosModules.home-manager
-            {
-              nixpkgs.overlays = [ nur.overlays.default ];
-            }
           ];
         };
 
