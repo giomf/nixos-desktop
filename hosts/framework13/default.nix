@@ -6,11 +6,17 @@
 {
   imports = [
     ../common.nix
-    ./greetd.nix
+    # ./greetd.nix
     ./steam.nix
     ./disko-config.nix
     ./hardware-configuration.nix
+    ./cosmic.nix
   ];
+
+  # home-manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.guif = ./home.nix;
 
   system.stateVersion = "24.11";
 

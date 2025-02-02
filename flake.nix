@@ -32,10 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # nixos-cosmic = {
-    #   url = "github:lilyinstarlight/nixos-cosmic";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -51,7 +51,7 @@
       nixpkgs-stable,
       nixpkgs-unstable,
       nur,
-      # nixos-cosmic,
+      nixos-cosmic,
       ...
     }:
     {
@@ -61,13 +61,6 @@
           modules = [
             ./hosts/l380
             nixos-hardware.nixosModules.lenovo-thinkpad-l13
-            # {
-            #   nix.settings = {
-            #     substituters = [ "https://cosmic.cachix.org/" ];
-            #     trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-            #   };
-            # }
-            # nixos-cosmic.nixosModules.default
             home-manager-unstable.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -84,11 +77,15 @@
             ./hosts/framework13
             disko.nixosModules.disko
             nixos-hardware.nixosModules.framework-13-7040-amd
+            {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
+            }
+            nixos-cosmic.nixosModules.default
             home-manager-unstable.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.guif = ./hosts/framework13/home.nix;
               nixpkgs.overlays = [ nur.overlays.default ];
             }
           ];

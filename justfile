@@ -2,6 +2,9 @@
 switch:
     nh os switch .\?submodules=1
 
+switch-remote:
+    nixos-rebuild switch --flake .\?submodules=1 --build-host guif.dev |& nom 
+
 # Update stable inputs
 update-stable:
     nix flake update nixpkgs-stable \
