@@ -72,7 +72,7 @@
   # Services
   services = {
     printing.enable = true;
-    blueman.enable = true;
+    # blueman.enable = true;
     fwupd.enable = true;
     pipewire = {
       enable = true;
