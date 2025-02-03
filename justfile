@@ -2,8 +2,8 @@
 switch:
     nh os switch .\?submodules=1
 
-switch-remote:
-    nixos-rebuild switch --flake .\?submodules=1 --build-host guif.dev |& nom 
+build-remote:
+    nixos-rebuild build --flake .\?submodules=1 --build-host guif.dev --use-substitutes |& nom 
 
 # Update stable inputs
 update-stable:
