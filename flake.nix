@@ -80,11 +80,6 @@
             ./hosts/wsl
             nixos-wsl.nixosModules.wsl
             home-manager-stable.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.guif = ./hosts/wsl/home.nix;
-            }
           ];
         };
       };

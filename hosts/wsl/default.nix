@@ -5,6 +5,10 @@
     ../common.nix
   ];
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.guif = ./home.nix;
+
   system.stateVersion = "23.05";
 
   system.activationScripts.bin-bash-hack = {
