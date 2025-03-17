@@ -71,7 +71,12 @@
 
   # Services
   services = {
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = [
+        pkgs.brlaser
+      ];
+    };
     # blueman.enable = true;
     fwupd.enable = true;
     pipewire = {
