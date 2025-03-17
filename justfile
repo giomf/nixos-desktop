@@ -1,5 +1,8 @@
 # Switch NixOS configuration
-switch:
+build:
+    nh os build .\?submodules=1
+
+switch: build
     nh os switch .\?submodules=1
 
 build-remote:
