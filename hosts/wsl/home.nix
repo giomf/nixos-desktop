@@ -8,10 +8,13 @@
 
   home.packages = [
     (pkgs.python313.withPackages (ppkgs: [
-      ppkgs.pylint
-      ppkgs.yapf
+      ppkgs.jedi-language-server
       ppkgs.mypy
+      ppkgs.pylint
+      ppkgs.python-lsp-ruff
       ppkgs.python-lsp-server
+      ppkgs.ruff
+      ppkgs.yapf
     ]))
   ];
 
