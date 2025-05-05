@@ -32,11 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
   };
@@ -51,7 +46,6 @@
       nixpkgs-stable,
       nixpkgs-unstable,
       nur,
-      nixos-cosmic,
       ...
     }:
     {
@@ -69,7 +63,6 @@
               };
               nixpkgs.overlays = [ nur.overlays.default ];
             }
-            nixos-cosmic.nixosModules.default
             home-manager-unstable.nixosModules.home-manager
           ];
         };
