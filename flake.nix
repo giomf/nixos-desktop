@@ -3,33 +3,24 @@
   inputs = {
 
     ### Stable
-    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager-stable = {
-      # url = "github:nix-community/home-manager/release-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Nix user repositories
     nur.url = "github:nix-community/NUR";
 
     # WSL
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    ### Unstable
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Disk partitioning
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -39,18 +30,16 @@
   outputs =
     {
       disko,
-      home-manager-stable,
-      home-manager-unstable,
+      home-manager,
       nixos-hardware,
       nixos-wsl,
-      nixpkgs-stable,
-      nixpkgs-unstable,
+      nixpkgs,
       nur,
       ...
     }:
     {
       nixosConfigurations = {
-        "glap" = nixpkgs-unstable.lib.nixosSystem {
+        "glap" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/framework13
@@ -63,22 +52,22 @@
               };
               nixpkgs.overlays = [ nur.overlays.default ];
             }
-            home-manager-unstable.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
           ];
         };
 
-        "wsl" = nixpkgs-stable.lib.nixosSystem {
+        "wsl" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/wsl
             nixos-wsl.nixosModules.wsl
-            home-manager-stable.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
           ];
         };
       };
       devShells.x86_64-linux.default =
         let
-          pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
         in
         pkgs.mkShell {
           buildInputs = with pkgs; [
