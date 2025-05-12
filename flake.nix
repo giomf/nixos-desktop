@@ -46,10 +46,6 @@
             disko.nixosModules.disko
             nixos-hardware.nixosModules.framework-13-7040-amd
             {
-              nix.settings = {
-                substituters = [ "https://cosmic.cachix.org/" ];
-                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-              };
               nixpkgs.overlays = [ nur.overlays.default ];
             }
             home-manager.nixosModules.home-manager
