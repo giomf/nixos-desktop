@@ -2,12 +2,20 @@
   description = "System flake";
   inputs = {
 
-    ### Stable
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    cosmic-manager = {
+      url = "github:HeitorAugustoLN/cosmic-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+
     # Nix user repositories
     nur.url = "github:nix-community/NUR";
 
@@ -30,6 +38,7 @@
   outputs =
     {
       disko,
+      cosmic-manager,
       home-manager,
       nixos-hardware,
       nixos-wsl,
@@ -49,6 +58,13 @@
               nixpkgs.overlays = [ nur.overlays.default ];
             }
             home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit cosmic-manager;
+                };
+              };
+            }
           ];
         };
 
