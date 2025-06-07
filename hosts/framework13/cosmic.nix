@@ -9,5 +9,6 @@
     cosmic-term
     cosmic-wallpapers
     cosmic-edit
+    cosmic-screenshot
   ];
 }
