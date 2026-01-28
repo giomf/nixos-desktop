@@ -19,6 +19,8 @@
     # Nix user repositories
     nur.url = "github:nix-community/NUR";
 
+    import-tree.url = "github:vic/import-tree";
+
     # WSL
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -33,61 +35,47 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs =
-    {
-      disko,
-      cosmic-manager,
-      home-manager,
-      nixos-hardware,
-      nixos-wsl,
-      nixpkgs,
-      nur,
-      ...
-    }:
-    {
-      nixosConfigurations = {
-        "glap" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/framework13
-            disko.nixosModules.disko
-            nixos-hardware.nixosModules.framework-13-7040-amd
-            {
-              nixpkgs.overlays = [ nur.overlays.default ];
-            }
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  inherit cosmic-manager;
-                };
-              };
-            }
-          ];
-        };
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }:
+      let
+        treeModules = inputs.import-tree ./modules;
+        treeHosts = inputs.import-tree ./hosts;
+      in
+      {
+        imports = [
+          treeModules
+          treeHosts
+          inputs.flake-parts.flakeModules.modules
+        ];
+        debug = true;
+        systems = [
+          "x86_64-linux"
+        ];
+        perSystem =
+          {
+            config,
+            self',
+            inputs',
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            devShells.default = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [
+                just
+                nh
+                nixos-rebuild-ng
+                nix-output-monitor
+              ];
+            };
+          };
+      }
+    );
 
-        "wsl" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/wsl
-            nixos-wsl.nixosModules.wsl
-            home-manager.nixosModules.home-manager
-          ];
-        };
-      };
-      devShells.x86_64-linux.default =
-        let
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        in
-        pkgs.mkShell {
-          buildInputs = with pkgs; [
-            just
-            nh
-            nixos-rebuild-ng
-            nix-output-monitor
-          ];
-        };
-    };
 }
