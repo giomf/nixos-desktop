@@ -69,7 +69,6 @@
             devShells.default = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 just
-                nh
                 nixos-rebuild-ng
                 nix-output-monitor
               ];

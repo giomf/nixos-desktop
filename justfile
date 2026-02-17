@@ -1,9 +1,10 @@
 # Switch NixOS configuration
 build:
-    nh os build .\?submodules=1
+    nixos-rebuild build --flake .\?submodules=1 |& nom 
 
 switch: build
-    nh os switch .\?submodules=1
+    sudo nixos-rebuild switch --flake .\?submodules=1 |& nom 
+
 
 build-remote:
     nixos-rebuild build --flake .\?submodules=1 --build-host guif.dev --use-substitutes |& nom 
