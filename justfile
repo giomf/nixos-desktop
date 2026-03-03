@@ -12,3 +12,5 @@ build-remote:
 # Update all inputs
 update:
     nix flake update
+
+#nix run github:nix-community/nixos-anywhere -- --flake <path to configuration>#<configuration name> --target-host root@<ip address>
