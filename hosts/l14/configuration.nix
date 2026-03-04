@@ -8,8 +8,10 @@ in
 {
   flake.modules.nixos.${hostName} = {
     imports = with inputs.self.modules.nixos; [
-      guif
       system-laptop
+
+      lobaro
+      guif
       systemd-boot
     ];
 
