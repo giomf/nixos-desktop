@@ -17,6 +17,7 @@
           guif = {
             extraGroups = [
               "networkmanager"
+              "dialout"
             ];
           };
         };
