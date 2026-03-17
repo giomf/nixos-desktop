@@ -23,7 +23,6 @@ in
         xdg.configFile."autostart/Keepassxc.desktop".source = ./autostart/Keepassxc.desktop;
 
         home.packages = [
-          pkgs.github-copilot-cli
         ];
       };
 
