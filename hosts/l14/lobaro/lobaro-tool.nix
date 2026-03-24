@@ -46,6 +46,17 @@
         };
       };
 
+      systemd.user.services.lobaro-tool = {
+        description = "Lobaro Tool";
+        partOf = [ "lobaro.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${lobaro-tool}/bin/lobaro-tool";
+          Restart = "on-failure";
+          RestartSec = "5s";
+        };
+      };
+
       environment.systemPackages = [ lobaro-tool ];
     };
 }

@@ -34,6 +34,17 @@
       };
     in
     {
+      systemd.user.services.power-profiler-kit = {
+        description = "Power Profiler Kit";
+        partOf = [ "lobaro.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${power-profiler-kit}/bin/lob-ppk-tool -p /dev/ttyACM0";
+          Restart = "on-failure";
+          RestartSec = "5s";
+        };
+      };
+
       environment.systemPackages = [ power-profiler-kit ];
     };
 }
