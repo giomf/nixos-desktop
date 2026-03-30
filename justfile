@@ -13,4 +13,4 @@ build-remote:
 update:
     nix flake update
 
-#nix run github:nix-community/nixos-anywhere -- --flake <path to configuration>#<configuration name> --target-host root@<ip address>
+#nix run github:nix-community/nixos-anywhere -- --flake .?submodules=1#<configuration> --target-host root@<ip address>

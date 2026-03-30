@@ -21,12 +21,6 @@
 
     import-tree.url = "github:vic/import-tree";
 
-    # WSL
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Disk partitioning
     disko = {
       url = "github:nix-community/disko";
