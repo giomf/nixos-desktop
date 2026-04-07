@@ -23,7 +23,8 @@ in
         ];
         xdg.enable = true;
         xdg.configFile."autostart/Keepassxc.desktop".source = ./autostart/Keepassxc.desktop;
-        home.packages = [
+        home.packages = with pkgs; [
+          bambu-studio
         ];
       };
 
