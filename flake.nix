@@ -27,6 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database.url = "github:nix-community/nix-index-database";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
