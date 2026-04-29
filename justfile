@@ -2,9 +2,11 @@
 build:
     nixos-rebuild build --flake .\?submodules=1 |& nom 
 
-switch: build
-    sudo nixos-rebuild switch --flake .\?submodules=1 |& nom 
+test:
+    sudo nixos-rebuild test --flake .\?submodules=1 |& nom 
 
+switch:
+    sudo nixos-rebuild switch --flake .\?submodules=1 |& nom 
 
 build-remote:
     nixos-rebuild build --flake .\?submodules=1 --build-host guif.dev --use-substitutes |& nom 
