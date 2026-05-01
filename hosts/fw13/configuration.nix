@@ -13,11 +13,14 @@ in
         guif
         system-laptop
         systemd-boot
+        hackrf
+
       ];
 
       home-manager.users.guif = {
         imports = with inputs.self.modules.homeManager; [
           system-laptop
+          hackrf
         ];
         xdg.enable = true;
         xdg.configFile."autostart/Keepassxc.desktop".source = ./autostart/Keepassxc.desktop;
