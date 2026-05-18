@@ -10,17 +10,20 @@ in
     { pkgs, ... }:
     {
       imports = with inputs.self.modules.nixos; [
-        guif
         system-laptop
-        systemd-boot
-        hackrf
+        guif
 
+        hackrf
+        secrets
+        systemd-boot
+        wireguard
       ];
 
       home-manager.users.guif = {
         imports = with inputs.self.modules.homeManager; [
           system-laptop
           hackrf
+          wireguard
         ];
         xdg.enable = true;
         xdg.configFile."autostart/Keepassxc.desktop".source = ./autostart/Keepassxc.desktop;

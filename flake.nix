@@ -31,6 +31,12 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # Secret handling
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -63,6 +69,7 @@
           {
             devShells.default = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
+                inputs.agenix.packages.${system}.default
                 just
                 nixos-rebuild-ng
                 nix-output-monitor
