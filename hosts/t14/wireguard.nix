@@ -1,20 +1,20 @@
 { inputs, ... }:
 {
   # Server PublicKey: 0bJ5UDH0CRweZicO8kvIl+xp5z5Mswvfp81H5tfKOFY=
-  # Client PublicKey: 5KsJbcZOpbgpvevv8s346KQD5Mfro+hbf6YrfKw83BM=
-  flake.modules.nixos.glap =
+  # Client PublicKey: 2JKbgFiIoMWBq1HE2oh3HVqDxhXbSvF10SsfDGhBHo=
+  flake.modules.nixos.gwork =
     { config, ... }:
     {
-      age.secrets.wireguard-fw13-key = {
-        file = "${inputs.self.outPath}/secrets/wireguard-fw13-key.age";
+      age.secrets.wireguard-t14-key = {
+        file = "${inputs.self.outPath}/secrets/wireguard-t14-key.age";
       };
 
       # Prevent NetworkManager from managing the WireGuard interface
       networking.networkmanager.unmanaged = [ "interface:wg0" ];
 
       networking.wg-quick.interfaces.wg0 = {
-        address = [ "192.168.26.2/32" ];
-        privateKeyFile = config.age.secrets.wireguard-fw13-key.path;
+        address = [ "192.168.26.4/32" ];
+        privateKeyFile = config.age.secrets.wireguard-t14-key.path;
         peers = [
           {
             publicKey = "0bJ5UDH0CRweZicO8kvIl+xp5z5Mswvfp81H5tfKOFY=";

@@ -16,7 +16,6 @@ in
         sdr
         secrets
         systemd-boot
-        wireguard
       ];
 
       home-manager.users.guif = {
