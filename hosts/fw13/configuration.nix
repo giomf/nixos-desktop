@@ -13,7 +13,7 @@ in
         system-laptop
         guif
 
-        hackrf
+        sdr
         secrets
         systemd-boot
         wireguard
@@ -22,7 +22,7 @@ in
       home-manager.users.guif = {
         imports = with inputs.self.modules.homeManager; [
           system-laptop
-          hackrf
+          sdr
           wireguard
         ];
         xdg.enable = true;
