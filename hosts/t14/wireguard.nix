@@ -13,6 +13,7 @@
       networking.networkmanager.unmanaged = [ "interface:wg0" ];
 
       networking.wg-quick.interfaces.wg0 = {
+        autostart = false;
         address = [ "192.168.26.4/32" ];
         privateKeyFile = config.age.secrets.wireguard-t14-key.path;
         peers = [
