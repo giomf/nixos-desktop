@@ -34,6 +34,9 @@
       # networking.interfaces.enp193s0f3u2u1.useDHCP = lib.mkDefault true;
       # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
+      # https://gitlab.freedesktop.org/drm/amd/-/work_items/4749
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+
       boot.kernelPatches = [
         {
           name = "Bluetooth: btmtk: accept too short WMT FUNC_CTRL events";
