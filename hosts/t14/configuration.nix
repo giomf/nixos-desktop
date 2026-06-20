@@ -27,6 +27,7 @@ in
         xdg.configFile."autostart/Keepassxc.desktop".source = ./autostart/Keepassxc.desktop;
         home.packages = with pkgs; [
           bambu-studio
+          picocom
         ];
       };
 
