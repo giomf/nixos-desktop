@@ -7,11 +7,11 @@
     let
       lobaro-tool = pkgs.stdenv.mkDerivation rec {
         pname = "lobaro-tool";
-        version = "2.19.0";
+        version = "2.20.2";
 
         src = pkgs.fetchurl {
-          url = "https://github.com/lobaro/flash-tool-release/releases/download/v${version}/lobaro-tool_2.19.0_linux_x86_64.zip";
-          sha256 = "sha256-eKoCbIfh2CZ+g06s4Zi3oyC5nNieKCF3KxSS8yAwzro=";
+          url = "https://github.com/lobaro/flash-tool-release/releases/download/v${version}/lobaro-tool_${version}_linux_x86_64.zip";
+          sha256 = "sha256-H+lMiHiSbOq9elZ0WhqJ0ac+zZj/JGI3zUnfNWRu7Vo=";
         };
 
         nativeBuildInputs = [
