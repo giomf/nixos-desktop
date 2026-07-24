@@ -7,7 +7,7 @@
     let
       version = "1.0.0";
       power-profiler-kit = pkgs.python3Packages.buildPythonPackage {
-        pname = "power-profiler-kit";
+        pname = "lob-ppk";
         inherit version;
         pyproject = true;
 
