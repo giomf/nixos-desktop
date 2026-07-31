@@ -18,7 +18,7 @@
       nixpkgs.config.allowUnfree = true;
       nixpkgs.config.segger-jlink.acceptLicense = true;
       nixpkgs.config.permittedInsecurePackages = [
-        "segger-jlink-qt4-874"
+        "segger-jlink-qt4-952"
       ];
       services.udev.packages = with pkgs; [
         segger-jlink
