@@ -5,7 +5,7 @@
   flake.modules.nixos.power-profiler-kit =
     { pkgs, ... }:
     let
-      version = "1.0.0";
+      version = "1.0.1";
       power-profiler-kit = pkgs.python3Packages.buildPythonPackage {
         pname = "lob-ppk";
         inherit version;
@@ -13,7 +13,7 @@
 
         src = builtins.fetchGit {
           url = "git@github.com:lobaro/python-lob-ppk.git";
-          rev = "13796f2c5604d5de100d889e1b83cd4adff50515";
+          rev = "6b9a844b93d2185c8b0623734587458d119dbe88";
           ref = "refs/tags/${version}";
         };
 
