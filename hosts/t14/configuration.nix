@@ -31,6 +31,11 @@ in
         ];
       };
 
+      programs.nix-ld.enable = true;
+      programs.nix-ld.libraries = with pkgs; [
+        systemd # libudev.so.1, needed by nrfutil-device
+      ];
+
       system.stateVersion = "24.11";
 
       networking = {
