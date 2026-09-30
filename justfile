@@ -25,4 +25,8 @@ diff: build-dry
 update:
     nix flake update
 
+# Regenerate flake.nix from flake-file inputs
+write-flake:
+    nix run .\?submodules=1#write-flake
+
 #nix run github:nix-community/nixos-anywhere -- --flake .?submodules=1#<configuration> --target-host root@<ip address>

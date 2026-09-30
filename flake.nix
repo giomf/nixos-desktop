@@ -1,82 +1,52 @@
+# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
   description = "System flake";
+
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        (inputs.import-tree ./flake)
+        (inputs.import-tree ./hosts)
+        (inputs.import-tree ./modules)
+      ];
+    };
+
   inputs = {
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-manager = {
-      url = "github:HeitorAugustoLN/cosmic-manager";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
-
-    # Nix user repositories
-    nur.url = "github:nix-community/NUR";
-
-    import-tree.url = "github:vic/import-tree";
-
-    # Disk partitioning
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-
-    # Secret handling
     agenix = {
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    cosmic-manager = {
+      url = "github:HeitorAugustoLN/cosmic-manager";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-file.url = "github:denful/flake-file";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
   };
-
-  outputs =
-    inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
-      { ... }:
-      let
-        treeModules = inputs.import-tree ./modules;
-        treeHosts = inputs.import-tree ./hosts;
-      in
-      {
-        imports = [
-          treeModules
-          treeHosts
-          inputs.flake-parts.flakeModules.modules
-        ];
-        debug = true;
-        systems = [
-          "x86_64-linux"
-        ];
-        perSystem =
-          {
-            config,
-            self',
-            inputs',
-            pkgs,
-            system,
-            ...
-          }:
-          {
-            devShells.default = pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [
-                inputs.agenix.packages.${system}.default
-                just
-                nixos-rebuild-ng
-                nix-output-monitor
-              ];
-            };
-          };
-      }
-    );
-
 }
