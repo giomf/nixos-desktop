@@ -1,21 +1,25 @@
-# Switch NixOS configuration
 [private]
 build-dry:
-    nixos-rebuild dry-build --flake .\?submodules=1 |& nom 
+    nixos-rebuild dry-build --flake .\?submodules=1 |& nom
 
-build:
-    nixos-rebuild build --flake .\?submodules=1 |& nom 
+# Build a host (defaults to this machine)
+build host=`hostname`:
+    nixos-rebuild build --flake .\?submodules=1#{{host}} |& nom
 
 test:
-    sudo nixos-rebuild test --flake .\?submodules=1 |& nom 
+    sudo nixos-rebuild test --flake .\?submodules=1 |& nom
 
+# Switch this machine
 switch:
-    sudo nixos-rebuild switch --flake .\?submodules=1 |& nom 
+    sudo nixos-rebuild switch --flake .\?submodules=1 |& nom
 
-build-remote:
-    nixos-rebuild build --flake .\?submodules=1 --build-host guif.dev --use-substitutes |& nom
+# Build a host on guif.dev (defaults to this machine)
+build-remote host=`hostname`:
+    nixos-rebuild build --flake .\?submodules=1#{{host}} --build-host guif.dev --use-substitutes |& nom
 
-# Preview what would be built/fetched, without building anything
+# Build and switch a server (main or backup)
+deploy host: (build host)
+    nixos-rebuild switch --flake .\?submodules=1#{{host}} --target-host {{ if host == "main" { "guif.dev" } else { "backup.guif.dev" } }} --sudo |& nom
 
 # Build and show what would change vs the running system
 diff: build-dry
@@ -24,6 +28,14 @@ diff: build-dry
 # Update all inputs
 update:
     nix flake update
+
+# Update the stable channel (servers)
+update-stable:
+    nix flake update nixpkgs home-manager
+
+# Update the unstable channel (desktops)
+update-unstable:
+    nix flake update nixpkgs-unstable home-manager-unstable
 
 # Regenerate flake.nix from flake-file inputs
 write-flake:

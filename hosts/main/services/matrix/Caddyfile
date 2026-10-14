@@ -1,0 +1,30 @@
+:8080 {
+    log
+    handle /.well-known/matrix/client {
+        header Content-Type application/json
+        respond <<JSON
+            {
+                "m.homeserver":{
+                     "base_url":"https://matrix.guif.dev"
+                },
+               "org.matrix.msc4143.rtc_foci":[
+                   {
+                       "type":"livekit",
+                       "livekit_service_url":"https://matrix.guif.dev/livekit/jwt"
+                   }
+               ]
+            }
+        JSON 200
+    }
+
+    handle /.well-known/matrix/server {
+        header Content-Type application/json
+        respond <<JSON
+            {
+              "m.server": "matrix.guif.dev:443"
+            }
+        JSON 200
+    }
+
+    respond 404
+}

@@ -16,6 +16,7 @@
           just
           nixos-rebuild-ng
           nix-output-monitor
+          compose2nix
         ];
       };
     };

@@ -1,0 +1,61 @@
+# Logging
+log:
+  level: Info
+  format: common
+  maxAge: 7
+accessLog:
+  addInternals: true
+
+# Skip TLS verification between proxy and backend
+serversTransport:
+  insecureSkipVerify: true
+
+# API
+api:
+  dashboard: true
+  insecure: false
+
+# Entrypoints
+entryPoints:
+  http:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+          permanent: true
+  https:
+    address: :443
+    asDefault: true
+    http:
+      tls:
+        certResolver: letsencrypt
+      # Allow double encoded percent, needed for:
+      # https://github.com/nextcloud/server/issues/57364
+      encodedCharacters:
+        allowEncodedPercent: true
+
+  # Used for stalwart
+  smtp:
+    address: :25
+  smtps:
+    address: :465
+  imaps:
+    address: :993
+
+# Providers
+providers:
+  docker:
+    watch: true
+    exposedByDefault: false
+    network: traefik
+
+# Cert sesolvers
+certificatesresolvers:
+  letsencrypt:
+    acme:
+      email: admin@lineareal.de
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: http

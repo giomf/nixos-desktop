@@ -8,9 +8,10 @@ let
 in
 {
   flake.nixosConfigurations = {
-    ${hostName} = inputs.nixpkgs.lib.nixosSystem {
+    ${hostName} = inputs.nixpkgs-unstable.lib.nixosSystem {
       modules = [
         inputs.self.modules.nixos."${hostName}"
+        inputs.home-manager-unstable.nixosModules.home-manager
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l14-amd
         inputs.disko.nixosModules.disko
         {
