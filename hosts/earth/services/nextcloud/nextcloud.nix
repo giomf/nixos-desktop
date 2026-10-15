@@ -24,7 +24,7 @@
         uploads = "/truck/crypt/lineareal/services/nextcloud/uploads";
       };
       version = {
-        nextcloud = "34.0.4-fpm";
+        nextcloud = "34.0.5-fpm";
         mariadb = "12.3";
         nginx = "1.31";
         redis = "8.10-alpine";
