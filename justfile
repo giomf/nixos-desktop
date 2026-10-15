@@ -17,9 +17,9 @@ switch:
 build-remote host=`hostname`:
     nixos-rebuild build --flake .\?submodules=1#{{host}} --build-host guif.dev --use-substitutes |& nom
 
-# Build and switch a server (main or backup)
+# Build and switch a server (earth or moon)
 deploy host: (build host)
-    nixos-rebuild switch --flake .\?submodules=1#{{host}} --target-host {{ if host == "main" { "guif.dev" } else { "backup.guif.dev" } }} --sudo |& nom
+    nixos-rebuild switch --flake .\?submodules=1#{{host}} --target-host {{host}}.guif.dev --sudo |& nom
 
 # Build and show what would change vs the running system
 diff: build-dry

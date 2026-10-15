@@ -3,7 +3,7 @@
   ...
 }:
 let
-  hostName = "backup";
+  hostName = "moon";
 in
 {
   flake.modules.nixos."${hostName}-server" = {

@@ -1,10 +1,10 @@
 { ... }:
 {
 
-  flake.modules.nixos.backup-server = {
+  flake.modules.nixos.earth-server = {
     networking = {
-      hostName = "backup";
-      hostId = "4461fd14";
+      hostName = "earth";
+      hostId = "d7710e38";
       useNetworkd = true;
       networkmanager.enable = false;
       firewall.enable = true;
@@ -16,11 +16,11 @@
       wait-online.enable = false;
       links = {
         "10-lan-1" = {
-          matchConfig.PermanentMACAddress = "1c:98:ec:0f:ab:54";
+          matchConfig.PermanentMACAddress = "3c:ec:ef:c2:4f:c8";
           linkConfig.Name = "lan1";
         };
         "20-lan-2" = {
-          matchConfig.PermanentMACAddress = "1c:98:ec:0f:ab:55";
+          matchConfig.PermanentMACAddress = "3c:ec:ef:c2:4f:c9";
           linkConfig.Name = "lan2";
         };
       };
@@ -37,6 +37,5 @@
         };
       };
     };
-
   };
 }

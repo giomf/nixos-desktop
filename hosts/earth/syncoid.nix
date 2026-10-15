@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.modules.nixos.main-server =
+  flake.modules.nixos.earth-server =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [

@@ -4,7 +4,7 @@
 }:
 
 let
-  hostName = "backup";
+  hostName = "moon";
 in
 {
   flake.nixosConfigurations = {

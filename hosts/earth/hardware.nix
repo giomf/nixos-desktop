@@ -1,41 +1,31 @@
 {
   ...
 }:
-
 {
-  flake.modules.nixos.backup-server =
+  flake.modules.nixos.earth-server =
     {
       config,
       lib,
       modulesPath,
       ...
     }:
+
     {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
       ];
 
-      boot = {
-        initrd = {
-          kernelModules = [ ];
-          availableKernelModules = [
-            "ahci"
-            "xhci_pci"
-            "nvme"
-            "usbhid"
-            "usb_storage"
-            "sd_mod"
-          ];
-        };
-
-        kernelModules = [ "kvm-intel" ];
-        extraModulePackages = [ ];
-        loader = {
-          grub.enable = true;
-          grub.device = "nodev";
-        };
-        zfs.requestEncryptionCredentials = [ ];
-      };
+      boot.initrd.availableKernelModules = [
+        "ahci"
+        "xhci_pci"
+        "nvme"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-intel" ];
+      boot.extraModulePackages = [ ];
 
       # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
       # (the default) this is the recommended approach. When using systemd-networkd it's

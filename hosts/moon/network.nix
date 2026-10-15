@@ -1,10 +1,10 @@
 { ... }:
 {
 
-  flake.modules.nixos.main-server = {
+  flake.modules.nixos.moon-server = {
     networking = {
-      hostName = "main";
-      hostId = "d7710e38";
+      hostName = "moon";
+      hostId = "4461fd14";
       useNetworkd = true;
       networkmanager.enable = false;
       firewall.enable = true;
@@ -16,11 +16,11 @@
       wait-online.enable = false;
       links = {
         "10-lan-1" = {
-          matchConfig.PermanentMACAddress = "3c:ec:ef:c2:4f:c8";
+          matchConfig.PermanentMACAddress = "1c:98:ec:0f:ab:54";
           linkConfig.Name = "lan1";
         };
         "20-lan-2" = {
-          matchConfig.PermanentMACAddress = "3c:ec:ef:c2:4f:c9";
+          matchConfig.PermanentMACAddress = "1c:98:ec:0f:ab:55";
           linkConfig.Name = "lan2";
         };
       };
@@ -37,5 +37,6 @@
         };
       };
     };
+
   };
 }

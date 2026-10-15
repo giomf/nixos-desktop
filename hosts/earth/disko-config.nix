@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.main-server = {
+  flake.modules.nixos.earth-server = {
     disko.devices = {
       disk = {
         nixos = {

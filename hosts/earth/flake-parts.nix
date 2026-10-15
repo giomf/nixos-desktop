@@ -4,7 +4,7 @@
 }:
 
 let
-  hostName = "main";
+  hostName = "earth";
 in
 {
   flake.nixosConfigurations = {

@@ -1,6 +1,6 @@
 {
 
-  flake.modules.nixos.backup-server = {
+  flake.modules.nixos.moon-server = {
     disko.devices = {
       disk = {
         boot = {

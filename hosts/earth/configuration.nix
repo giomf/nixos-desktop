@@ -3,7 +3,7 @@
   ...
 }:
 {
-  flake.modules.nixos.main-server = {
+  flake.modules.nixos.earth-server = {
     imports = with inputs.self.modules.nixos; [
       # Base
       system-server

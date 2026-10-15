@@ -1,8 +1,8 @@
 let
   fw13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGyA0YMlOsOS7837MPi8ocaS5mf8IwNoX741yey+5gGF";
   t14 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM+Iz2Ho2ZajEmM+BOEObmJQTGICjaUER0oWA2TJpw8k";
-  main = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICboH9u2FM08E+E+3NzYE7+1pm+RyfBMvHfmR1XNun1V";
-  backup = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIClkuNfZkYdC9mTajfG5O4hJuCuL/C+xOXWaOg75CbM0";
+  earth = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICboH9u2FM08E+E+3NzYE7+1pm+RyfBMvHfmR1XNun1V";
+  moon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIClkuNfZkYdC9mTajfG5O4hJuCuL/C+xOXWaOg75CbM0";
   guif = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPI4hVcnH2C5Rq0Pkgv+rw2h1dAm2QQdyboDfW7kUlw";
 in
 {
@@ -18,68 +18,68 @@ in
 
   # Servers
   "immich.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "lineareal-admin-email-password.age".publicKeys = [
-    main
-    backup
+    earth
+    moon
     guif
   ];
   "matrix-mas-database.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "matrix-synapse-database.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "matrix-synapse.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "matrix-mas.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "matrix-jwt.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "matrix-sfu.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "moodle.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "nextcloud-database.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "paperless.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "passwordpusher.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "stoat.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "traefik.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "wireguard-key.age".publicKeys = [
-    main
+    earth
     guif
   ];
   "zfs.age".publicKeys = [
-    main
+    earth
     guif
   ];
 }
