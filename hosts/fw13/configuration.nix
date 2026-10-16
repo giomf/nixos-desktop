@@ -13,7 +13,6 @@ in
         system-laptop
         guif
 
-        sdr
         secrets
         systemd-boot
       ];
@@ -21,7 +20,6 @@ in
       home-manager.users.guif = {
         imports = with inputs.self.modules.homeManager; [
           system-laptop
-          sdr
           wireguard
         ];
         xdg.enable = true;
