@@ -36,6 +36,9 @@ in
         systemd # libudev.so.1, needed by nrfutil-device
       ];
 
+      # Build aarch64 hosts (discobox)
+      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
       system.stateVersion = "24.11";
 
       networking = {
