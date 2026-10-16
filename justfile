@@ -25,6 +25,12 @@ deploy host target=(if host == "discobox" { "guif@discobox.local" } else { host 
 image host="discobox":
     nix build .\?submodules=1#nixosConfigurations.{{host}}.config.system.build.sdImage |& nom
 
+# Build the SD card image on guif.dev and copy it back to ./result
+image-remote host="discobox":
+    out=$(nix build --eval-store auto --store ssh-ng://guif.dev --print-out-paths .\?submodules=1#nixosConfigurations.{{host}}.config.system.build.sdImage) \
+      && nix copy --from ssh-ng://guif.dev --no-check-sigs $out \
+      && nix build --out-link result $out
+
 # Flash the built image to a device, e.g. just flash /dev/sdX
 flash device:
     zstdcat result/sd-image/*.img.zst | sudo dd of={{device}} bs=4M status=progress conv=fsync

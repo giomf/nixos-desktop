@@ -52,6 +52,9 @@
     #   ];
     # };
 
+    # Build aarch64 hosts
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     system.stateVersion = "24.05";
   };
 }
